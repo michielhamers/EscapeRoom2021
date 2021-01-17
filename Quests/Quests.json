@@ -4,7 +4,7 @@
     "type": "ps1",
     "active": true,
     "Correct": false,
-    "Solved": true,
+    "Solved": false,
     "Attempt": 0,
     "Answer": false
   },
@@ -13,11 +13,11 @@
     "type": "Q",
     "active": true,
     "Correct": 7,
-    "Solved": true,
-    "Attempt": 1,
-    "Answer": "7"
+    "Solved": false,
+    "Attempt": 0,
+    "Answer": false
   },
-  "hoofdpersonage": {
+  "questb": {
     "Question": "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
     "type": "Q",
     "active": true,
@@ -31,9 +31,9 @@
     "type": "Q",
     "active": true,
     "Correct": "Appel",
-    "Solved": true,
-    "Attempt": 2,
-    "Answer": "appel"
+    "Solved": false,
+    "Attempt": 1,
+    "Answer": false
   },
   "SnakeGame": {
     "Question": "snake.ps1",

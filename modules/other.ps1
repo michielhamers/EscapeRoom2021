@@ -2,7 +2,7 @@ function openbrowser($url,$expires){
     start-Process -FilePath $url -PassThru
     
     write-host "quit after $expires seconds" -nonewline
-    1..$expires | % {
+    1..$expires | ForEach-Object {
         write-host "." -nonewline
         sleep 1
     }
@@ -15,7 +15,6 @@ function openvideo(){
      # Start-Process "./media/chris.mp4" 
 }
 function ballinbox(){
-
     for(){cls
         ($l="+$('-'*18)+")
         7..0|%{$j=$_

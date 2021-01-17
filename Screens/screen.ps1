@@ -1,13 +1,10 @@
-Clear-Host
-. ./modules/ascii.ps1
-. ./Quests/Quests.ps1
-. ./modules/other.ps1
-$screenneedupdate=$true;
 function choosescreen(){
-  Write-host "will this be which monitor?"
-  $screennumber=Read-host "screen"
-  $global:thisscreen=$screennumber
-  return $screennumber
+  $screennumer=$global:thisscreen
+  if ($global:thisscreen -eq "0"){
+    Write-host "will this be which monitor?"
+    $screennumber=Read-host "screen"
+    $global:thisscreen=$screennumber
+  };
 }
 function Setcolors($achtergrond){
   $Host.UI.RawUI.BackgroundColor = ($bckgrnd = $achtergrond)
@@ -24,38 +21,41 @@ function Setcolors($achtergrond){
   $Host.PrivateData.ProgressBackgroundColor = $bckgrnd
 }
 
-function showscreen($x){
-  $lastupdategamestatus="NEVERUPDATED"
+function showscreen(){
   do {
-
     $screen=Get-Content $global:screen_json -Raw |ConvertFrom-Json
-    switch ($x) {
-      1 {$currentscreen=$screen.Screens.Screen1 }
-      2 {$currentscreen=$screen.Screens.Screen2 }
-      3 {$currentscreen=$screen.Screens.Screen3 }
-      4 {$currentscreen=$screen.Screens.Screen4 }
-      5 {$currentscreen=$screen.Screens.Screen5 }
-      Default {$currentscreen=$screen.Screens.Screen1;}
-    }
+    $currentscreen=$a.Screens | Where-Object {$_.Screen -eq $global:thisscreen}
     if ($currentscreen.active){
       Setcolors $currentscreen.screenbackground;
     } else {
       Setcolors "red";
       Clear-host
+      $currentscreen
+      $a.screens 
       Read-host " bug found contact the admin"
     }
     ####
     # $lastupdategamestatus=$screen.CurrentGame.Game
     Clear-Host
-    write-host "[$x]                                                       "$screen.CurrentGame.Game -ForegroundColor Yellow
-    # write-host (bigtekst $currentscreen.header) -ForegroundColor Yellow
-    header
+    write-host "[$global:thisscreen]                                                       "$screen.CurrentGame.Game -ForegroundColor Yellow
+    # header
+    write-host (bigtekst $currentscreen.header) -ForegroundColor Yellow
     $showgeneralcountdown=$currentscreen.showgeneralcountdown;
     if ($currentscreen.Contentvisible) {
-      write-host $currentscreen.content -ForegroundColor yellow
+      if ($screen.CurrentGame.Game -eq "Winner"){
+        write-host (bigtekst $currentscreen.content) -ForegroundColor yellow
+      } else {
+        write-host $currentscreen.content -ForegroundColor yellow
+      }
     } else {
       write-host ""
     }
+    if ($screen.CurrentGame.Game -eq "stopped"){
+      start-sleep 5
+    }
+    if ($screen.CurrentGame.Game -ne "stopped"){
+
+    
     if ($screen.CurrentGame.Game -eq "Waitingtostart") {
       if ($currentscreen.Questassigned -eq "databar") {
         startquest $currentscreen.Questassigned
@@ -68,18 +68,12 @@ function showscreen($x){
         $temptijd=(get-date $screen.CurrentGame.countdownto -format o)
         $EndDate=[datetime]$temptijd
         if (-not $enddate) {
-          WRITE-host " FOUT"
+          Write-host " FOUT"
           Read-host " en nu?"
         }
         $verschil=(NEW-TIMESPAN -Start $StartDate -End $EndDate)
         $verschil_inmin=[int]$verschil.Hours*60
         $verschil_inmin+=$verschil.minutes
-        # $verschil_inmins=$verschil_inmin.tostring
-        # $minutesleft= afronden $verschil_inmins
-        # write-host "test----------------==========="
-        # write-host $verschil_inmin`
-        # read-host "test na"
-        # $left=$verschil_inmin
         $left_big=bigtekst $verschil_inmin;
         Write-Host $left_big;
       }
@@ -89,26 +83,31 @@ function showscreen($x){
         write-host "Dit scherm wacht nu niet op invoer"
         Write-host "Scherm vernieuwd elke "$currentscreen.refresh "seconden" -NoNewline
         # $pos = $host.UI.RawUI.cursorPosition;
-        1..$currentscreen.refresh | % {
+        1..$currentscreen.refresh | ForEach-Object {
           if ($screen.CurrentGame.Game -eq "Started"){
             Start-Sleep 1
             write-host "."   -nonewline
           }
           if ($screen.CurrentGame.Game -eq "Winner"){
-            Start-Sleep 10
+            Start-Sleep 1
+            write-host "."   -nonewline
+          }
+          if ($screen.CurrentGame.Game -eq "Loser"){
+            Start-Sleep 1
             write-host "."   -nonewline
           }
           
         }
       }  
     }
+    }
 
   } while (($screen.CurrentGame.active) -or ($screen.CurrentGame.Game -eq "Waitingtostart"))
 }
 function mainscreen(){
 
-  $x=choosescreen;
-  showscreen $x;
+  choosescreen;
+  showscreen;
   Setcolors black
 }
 mainscreen;

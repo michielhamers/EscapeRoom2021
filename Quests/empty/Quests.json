@@ -17,7 +17,7 @@
     "Attempt": 0,
     "Answer": false
   },
-  "hoofdpersonage": {
+  "questb": {
     "Question": "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
     "type": "Q",
     "active": true,

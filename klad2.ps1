@@ -9,3 +9,7 @@ $a.Screens | % {
     $_.Name
 }
 # | Select -ExpandProperty Type
+
+$a.screens | where {$_.screen -eq 5}
+
+
