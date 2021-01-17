@@ -1,9 +1,9 @@
 {
   "CurrentGame": {
-    "countdownto": "1/17/2021 10:43:03 AM",
+    "countdownto": false,
     "active": true,
-    "Game": "Started",
-    "lastupdated": "1/17/2021 10:13:03 AM"
+    "Game": "waitingtostart",
+    "lastupdated":false
   },
   "Screens": {
     "Screen1": {
@@ -11,7 +11,7 @@
       "showgeneralcountdown": true,
       "Content": "Dit is het hoofdscherm, bij dit hoofdscherm zit geen toetsenbord.",
       "Contentvisible": true,
-      "Questassigned": false,
+      "Questassigned" : false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
@@ -22,7 +22,7 @@
       "showgeneralcountdown": false,
       "Content": "Scherm 2. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned": false,
+      "Questassigned" : false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
@@ -33,7 +33,7 @@
       "showgeneralcountdown": false,
       "Content": "Scherm 3. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned": false,
+      "Questassigned" : false,
       "waitoninput": false,
       "refresh": "5",
       "active": true,
@@ -44,7 +44,7 @@
       "showgeneralcountdown": false,
       "Content": "Scherm 4. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned": false,
+      "Questassigned" : false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
@@ -55,7 +55,7 @@
       "showgeneralcountdown": false,
       "Content": "Scherm 5. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned": false,
+      "Questassigned" : false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,

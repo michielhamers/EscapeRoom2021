@@ -2,15 +2,16 @@ clear-host
 . ./modules/ascii.ps1
 . ./Quests/Quests.ps1
 . ./modules/other.ps1
-                                                        
-
+$global:screen_json = "./screens/screen.json";
+$global:quests_json = "./quests/quests.json"; 
+$global:thisscreen = 0;                                                   
 function clearlogs(){
-    Remove-Item -Path .\temp\old\*.log
-    move-Item -Path .\temp\*.log -Destination .\temp\old\
-    Write-Output "Starting" |Out-File -FilePath temp/main.log
+    # Remove-Item -Path .\temp\old\*.*
+    # move-Item -Path .\temp\*.log -Destination .\temp\old\ 
+    Write-Output "Starting" |Out-File -FilePath ./temp/main.log
     $firstentryoflog='Start new logfile '+(get-date)
     Set-Content -Path .\temp\*.log -Filter *.log -Value $firstentryoflog
-}
+}   
 function header(){
     $t=bigtekst "Escaperoom"
     # write-host ()  -ForegroundColor red;
@@ -41,12 +42,12 @@ function showgameconfig(){
 function resetgameroom(){
     write-host "resetgameroom"
     # Remove-Item -Path .\answers\*.txt  
-    Copy-Item ./Screens/empty/screen.json ./screens/screen.json;
+    Copy-Item ./Screens/empty/screen.json $global:screen_json;
     resetallquests;
 }
 function winner(){
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json; -Raw |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Winner"
     $a.Screens.Screen1.Content = "WINNER"
@@ -69,11 +70,11 @@ function winner(){
     $a.Screens.Screen5.Contentvisible = $true;
     $a.Screens.Screen5.screenbackground="green"
     $a.Screens.Screen5.refresh=30;
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
 }
 function loser(){
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Loser"
     $a.Screens.Screen1.Content = "Loser "
@@ -91,7 +92,7 @@ function loser(){
     $a.Screens.Screen5.Content = "Loser"
     $a.Screens.Screen5.Contentvisible = $true;
     $a.Screens.Screen5.screenbackground="red"
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
     # $a | ConvertTo-Json
 }
 function menu(){
@@ -118,27 +119,43 @@ function menu(){
 }
 function startEscape(){
     write-host "startEscape"
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Started"
-    $a.CurrentGame.countdownto=(get-date).AddMinutes($maintimer).tostring()
+    $a.CurrentGame.countdownto=(get-date).AddMinutes($maintimer)
+    $a.CurrentGame.countdownto=get-date $a.CurrentGame.countdownto -format o
     $a.CurrentGame.LastUpdated=(get-date).tostring()
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
+}
+function waitfordatabarquestcomple(){
+    write-host "waitfordatabarquestcomple "$screen $quest
+    # $pathToJson = "./Quests/quests.json";
+    do {
+        $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
+        start-sleep 1
+        write-host "." -NoNewline
+    } while ($a.databar.Solved -eq $false);
+}
+function usbconnectandstart(){
+    startquestonscreen -screen 1 -quest databar
+    waitfordatabarquestcomple;
+    stopquestonscreen 1
+    thegreatescape
 }
 function getCurrentGameStatus(){
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = $global:screen_json
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
     return $a;
 }
 function stopEscape(){
     write-host "stopEscape"
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
     $a.CurrentGame.active = $false
     $a.CurrentGame.Game = "STOPPED"
     $a.CurrentGame.LastUpdated=(get-date).tostring()
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
 }
 function useasscreenonly(){
     write-host "useasscreenonly"
@@ -149,8 +166,8 @@ function useasscreenonly(){
 }
 function startquestonscreen ($screen, $quest){
     write-host "startquestonscreen "$screen $quest
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
       switch ($screen) {
         1 {$currentscreen=$a.Screens.Screen1 }
         2 {$currentscreen=$a.Screens.Screen2 }
@@ -161,12 +178,12 @@ function startquestonscreen ($screen, $quest){
       }
     $currentscreen.Questassigned = $quest
     $a.CurrentGame.LastUpdated=(get-date).tostring()
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
 }
 function stopquestonscreen ($screen){
     write-host "startquestonscreen "$screen $quest
-    $pathToJson = "./Screens/screen.json"
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    # $pathToJson = "./Screens/screen.json"
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
       switch ($screen) {
         1 {$currentscreen=$a.Screens.Screen1 }
         2 {$currentscreen=$a.Screens.Screen2 }
@@ -176,8 +193,9 @@ function stopquestonscreen ($screen){
         Default {$currentscreen=$a.Screens.Screen2;}
       }
     $currentscreen.Questassigned = $false
+    # $currentscreen.Solved = $true
     $a.CurrentGame.LastUpdated=(get-date).tostring()
-    $a | ConvertTo-Json | set-content $pathToJson
+    $a | ConvertTo-Json | set-content $global:screen_json
 }
 function startquestsnake(){
     write-host "startquestsnake"
@@ -191,9 +209,9 @@ function startquestsnake(){
 }
 function waitquestsnake(){
     write-host "waitquestsnake "$screen $quest
-    $pathToJson = "./Quests/quests.json";
+    # $pathToJson = "./Quests/quests.json";
     do {
-        $a = Get-Content $pathToJson -Raw |ConvertFrom-Json;
+        $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
         start-sleep 1
         write-host "." -NoNewline
     } while ($a.SnakeQuestion.Solved -eq $false);
@@ -203,14 +221,14 @@ function waitquestsnake(){
 function autodecide(){
     write-host "autodecide"
 
-    $pathToJson = "./Screens/screen.json"
+    # $pathToJson = "./Screens/screen.json"
 
     
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
+    $a = Get-Content $global:screen_json -Raw |ConvertFrom-Json
     $countdownto=$a.CurrentGame.countdownto
-    $secleft=(NEW-TIMESPAN –Start (get-date)  –End $countdownto).TotalSeconds
+    # $secleft=(NEW-TIMESPAN –Start (get-date)  –End $countdownto).TotalSeconds
 
-    $StartDate=[datetime](GET-DATE)
+    $StartDate=[datetime](GET-DATE -format o)
     $EndDate=[datetime]$a.CurrentGame.countdownto
     $verschil=(NEW-TIMESPAN –Start $StartDate –End $EndDate)
     $verschil_inmin=[int]$verschil.Hours*60
@@ -235,9 +253,9 @@ function stopANDreset(){
 }
 function startquestA(){
     startquestonscreen 2 "questa"
-    $pathToJson = "./Quests/quests.json";
+    # $pathToJson = "./Quests/quests.json";
     do {
-        $a = Get-Content $pathToJson -Raw |ConvertFrom-Json;
+        $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
         start-sleep 1
         write-host "." -NoNewline
     } while ($a.questa.Solved -eq $false);
@@ -283,6 +301,7 @@ function main(){
             "2" {showgameconfig}
             "3" {resetgameroom}
             "42" {startEscape;}
+            "42usb" {usbconnectandstart;}
             "4" {autodecide}
             "43" {stopEscape;}
             "4242" {winner;}

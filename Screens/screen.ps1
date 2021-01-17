@@ -6,6 +6,7 @@ $screenneedupdate=$true;
 function choosescreen(){
   Write-host "will this be which monitor?"
   $screennumber=Read-host "screen"
+  $global:thisscreen=$screennumber
   return $screennumber
 }
 function Setcolors($achtergrond){
@@ -26,7 +27,8 @@ function Setcolors($achtergrond){
 function showscreen($x){
   $lastupdategamestatus="NEVERUPDATED"
   do {
-    $screen=Get-Content ./screens/screen.json -Raw |ConvertFrom-Json
+
+    $screen=Get-Content $global:screen_json -Raw |ConvertFrom-Json
     switch ($x) {
       1 {$currentscreen=$screen.Screens.Screen1 }
       2 {$currentscreen=$screen.Screens.Screen2 }
@@ -55,13 +57,21 @@ function showscreen($x){
       write-host ""
     }
     if ($screen.CurrentGame.Game -eq "Waitingtostart") {
+      if ($currentscreen.Questassigned -eq "databar") {
+        startquest $currentscreen.Questassigned
+      }
       start-sleep 5
     } else {
       if ($showgeneralcountdown) {
         write-host "Minutes Left " 
         $StartDate=(GET-DATE)
-        $EndDate=[datetime]$screen.CurrentGame.countdownto
-        $verschil=(NEW-TIMESPAN –Start $StartDate –End $EndDate)
+        $temptijd=(get-date $screen.CurrentGame.countdownto -format o)
+        $EndDate=[datetime]$temptijd
+        if (-not $enddate) {
+          WRITE-host " FOUT"
+          Read-host " en nu?"
+        }
+        $verschil=(NEW-TIMESPAN -Start $StartDate -End $EndDate)
         $verschil_inmin=[int]$verschil.Hours*60
         $verschil_inmin+=$verschil.minutes
         # $verschil_inmins=$verschil_inmin.tostring
@@ -81,7 +91,7 @@ function showscreen($x){
         # $pos = $host.UI.RawUI.cursorPosition;
         1..$currentscreen.refresh | % {
           if ($screen.CurrentGame.Game -eq "Started"){
-            Start-Sleep 0.5
+            Start-Sleep 1
             write-host "."   -nonewline
           }
           if ($screen.CurrentGame.Game -eq "Winner"){

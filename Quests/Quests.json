@@ -1,4 +1,22 @@
 {
+  "databar": {
+    "Question": "databar.ps1",
+    "type": "ps1",
+    "active": true,
+    "Correct": false,
+    "Solved": true,
+    "Attempt": 0,
+    "Answer": false
+  },
+  "questa": {
+    "Question": "Wat is het aantal Harry Potter boeken?",
+    "type": "Q",
+    "active": true,
+    "Correct": 7,
+    "Solved": true,
+    "Attempt": 1,
+    "Answer": "7"
+  },
   "hoofdpersonage": {
     "Question": "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
     "type": "Q",
@@ -13,9 +31,9 @@
     "type": "Q",
     "active": true,
     "Correct": "Appel",
-    "Solved": false,
-    "Attempt": 1,
-    "Answer": false
+    "Solved": true,
+    "Attempt": 2,
+    "Answer": "appel"
   },
   "SnakeGame": {
     "Question": "snake.ps1",
@@ -52,14 +70,5 @@
     "Solved": false,
     "Attempt": 0,
     "Answer": ""
-  },
-  "questa": {
-    "Question": "Wat is het aantal Harry Potter boeken?",
-    "type": "Q",
-    "active": true,
-    "Correct": 7,
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": false
   }
 }

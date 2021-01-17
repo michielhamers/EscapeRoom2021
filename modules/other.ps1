@@ -52,9 +52,9 @@ function waitforUSB($timeout){
     $aftellen=$timeout;
     do {
         $paden=Join-Path -path ((Get-PSDrive -PSProvider FileSystem).root) -ChildPath "ER.TXT"
-        $paden | % {
+        $paden | ForEach-Object {
             if (test-path $_) {
-                $usbgekoppeld =$true
+                $usbgekoppeld = $true
             }
         }
         $aftellen--;

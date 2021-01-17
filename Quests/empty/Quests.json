@@ -1,4 +1,13 @@
 {
+  "databar": {
+    "Question": "databar.ps1",
+    "type": "ps1",
+    "active": true,
+    "Correct": false,
+    "Solved": false,
+    "Attempt": 0,
+    "Answer": false
+  },
   "questa": {
     "Question": "Wat is het aantal Harry Potter boeken?",
     "type": "Q",

@@ -1,8 +1,8 @@
 {
   "CurrentGame": {
-    "countdownto": "15/jan/2021 18:00:00",
+    "countdownto": false,
     "active": true,
-    "Game":"waitingtostart",
+    "Game": "waitingtostart",
     "lastupdated":false
   },
   "Screens": {

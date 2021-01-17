@@ -1,18 +1,19 @@
 
 
 function resetallquests(){
-        Copy-Item ./Quests/empty/quests.json ./Quests/quests.json;
+        Copy-Item ./Quests/empty/quests.json $global:quests_json;
 }
 function startquest($questname){
     write-host "Start: $questname"
-    $pathToJson = "./Quests/quests.json";
-    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json;
+    # $pathToJson = "./Quests/quests.json";
+    $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
     switch ($questname) {
         "hoofdpersonage"  {$currentquest=$a.questa}
         "SnakeQuestion"  {$currentquest=$a.SnakeQuestion}
         "SnakeGame" {$currentquest=$a.SnakeGame}
         "starthintmovie" {$currentquest=$a.starthintmovie}
         "SnakeMovie" {$currentquest=$a.SnakeMovie}
+        "databar" {$currentquest=$a.databar}
         "questa" {$currentquest=$a.questa}
         "questb" {$currentquest=$a.questb}
         "questc" {$currentquest=$a.questc}
@@ -40,10 +41,10 @@ function startquest($questname){
             if ($currentquest.type -eq "Q") {
                 $currentquest.answer=read-host $currentquest.Question;
                 $currentquest.Attempt++;
-                $a | ConvertTo-Json | set-content $pathToJson;
+                $a | ConvertTo-Json | set-content $global:quests_json;
                 if ($currentquest.answer -eq $currentquest.Correct) {
                     Write-host "Het antwoord is goed!";
-                    $a = Get-Content $pathToJson -Raw |ConvertFrom-Json;
+                    $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
                     switch ($questname) {
                         "questa"  {$a.questa.Solved=$true;$currentquest.solved=$true;}
                         "hoofdpersonage"  {$a.questa.Solved=$true;$currentquest.solved=$true;}
@@ -51,7 +52,7 @@ function startquest($questname){
                         "SnakeGame" {$a.SnakeGame.Solved=$true;$currentquest.solved=$true;}
                         Default  { exit;}
                     }
-                    $a | ConvertTo-Json | set-content $pathToJson;
+                    $a | ConvertTo-Json | set-content $global:quests_json;
                     start-sleep 5
                 }
             }
