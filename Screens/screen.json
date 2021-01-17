@@ -1,0 +1,65 @@
+{
+  "CurrentGame": {
+    "countdownto": "1/17/2021 10:43:03 AM",
+    "active": true,
+    "Game": "Started",
+    "lastupdated": "1/17/2021 10:13:03 AM"
+  },
+  "Screens": {
+    "Screen1": {
+      "header": "EscapeRoom ±",
+      "showgeneralcountdown": true,
+      "Content": "Dit is het hoofdscherm, bij dit hoofdscherm zit geen toetsenbord.",
+      "Contentvisible": true,
+      "Questassigned": false,
+      "waitoninput": false,
+      "refresh": 5,
+      "active": true,
+      "screenbackground": "blue"
+    },
+    "Screen2": {
+      "header": "EscapeRoom ±",
+      "showgeneralcountdown": false,
+      "Content": "Scherm 2. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
+      "Contentvisible": true,
+      "Questassigned": false,
+      "waitoninput": false,
+      "refresh": 5,
+      "active": true,
+      "screenbackground": "blue"
+    },
+    "Screen3": {
+      "header": "EscapeRoom ±",
+      "showgeneralcountdown": false,
+      "Content": "Scherm 3. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
+      "Contentvisible": true,
+      "Questassigned": false,
+      "waitoninput": false,
+      "refresh": "5",
+      "active": true,
+      "screenbackground": "BLUE"
+    },
+    "Screen4": {
+      "header": "EscapeRoom ±",
+      "showgeneralcountdown": false,
+      "Content": "Scherm 4. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
+      "Contentvisible": true,
+      "Questassigned": false,
+      "waitoninput": false,
+      "refresh": 5,
+      "active": true,
+      "screenbackground": "BLUE"
+    },
+    "Screen5": {
+      "header": "EscapeRoom ±",
+      "showgeneralcountdown": false,
+      "Content": "Scherm 5. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
+      "Contentvisible": true,
+      "Questassigned": false,
+      "waitoninput": false,
+      "refresh": 5,
+      "active": true,
+      "screenbackground": "BLUE"
+    }
+  }
+}
