@@ -4,18 +4,20 @@ function resetallquests(){
         Copy-Item ./Quests/empty/quests.json $global:quests_json;
 }
 function startquest($questname){
-    write-host "Start: $questname"
-    # $pathToJson = "./Quests/quests.json";
-    $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
+    do {
+        write-host "."
+        start-sleep 1
+    } while ((Test-IsFileLocked -Path $global:quests_json).islocked)
+    $q = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
     switch ($questname) {
-        "hoofdpersonage"  {$currentquest=$a.questa}
-        "SnakeQuestion"  {$currentquest=$a.SnakeQuestion}
-        "SnakeGame" {$currentquest=$a.SnakeGame}
-        "starthintmovie" {$currentquest=$a.starthintmovie}
-        "SnakeMovie" {$currentquest=$a.SnakeMovie}
-        "databar" {$currentquest=$a.databar}
-        "questa" {$currentquest=$a.questa}
-        "questb" {$currentquest=$a.questb}
+        "hoofdpersonage"  {$currentquest=$q.questa}
+        "SnakeQuestion"  {$currentquest=$q.SnakeQuestion}
+        "SnakeGame" {$currentquest=$q.SnakeGame}
+        "starthintmovie" {$currentquest=$q.starthintmovie}
+        "SnakeMovie" {$currentquest=$q.SnakeMovie}
+        "databar" {$currentquest=$q.databar}
+        "questa" {$currentquest=$q.questa}
+        "questb" {$currentquest=$q.questb}
         "questc" {$currentquest=$a.questc}
         "questd" {$currentquest=$a.questd}
         "queste" {$currentquest=$a.queste}
@@ -27,7 +29,6 @@ function startquest($questname){
         "questk" {$currentquest=$a.questk}
         "questl" {$currentquest=$a.questl}
         "questm" {$currentquest=$a.questm}
-
         Default  { read-host "Check quests.ps1 and add questname in list ";exit;}
     }
     if ($currentquest.type -eq "func") {
@@ -40,24 +41,29 @@ function startquest($questname){
         do {
             if ($currentquest.type -eq "Q") {
                 $currentquest.answer=read-host $currentquest.Question;
-                $currentquest.Attempt++;
-                $a | ConvertTo-Json | set-content $global:quests_json;
                 if ($currentquest.answer -eq $currentquest.Correct) {
                     Write-host "Het antwoord is goed!";
-                    $a = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
+                    do {
+                        write-host "."
+                        start-sleep 1
+                    } while ((Test-IsFileLocked -Path $global:quests_json).islocked)
+                    $q = Get-Content $global:quests_json -Raw |ConvertFrom-Json;
                     switch ($questname) {
-                        "questa"  {$a.questa.Solved=$true;$currentquest.solved=$true;}
-                        "hoofdpersonage"  {$a.questa.Solved=$true;$currentquest.solved=$true;}
-                        "SnakeQuestion"  {$a.SnakeQuestion.Solved=$true;$currentquest.solved=$true;}
-                        "SnakeGame" {$a.SnakeGame.Solved=$true;$currentquest.solved=$true;}
+                        "questa"  {$q.questa.Solved=$true;$currentquest.solved=$true;}
+                        "hoofdpersonage"  {$q.questa.Solved=$true;$currentquest.solved=$true;}
+                        "SnakeQuestion"  {$q.SnakeQuestion.Solved=$true;$currentquest.solved=$true;}
+                        "SnakeGame" {$q.SnakeGame.Solved=$true;$currentquest.solved=$true;}
                         Default  { exit;}
                     }
-                    $a | ConvertTo-Json | set-content $global:quests_json;
+                    do {
+                        write-host "."
+                        start-sleep 1
+                    } while ((Test-IsFileLocked -Path $global:quests_json).islocked)
+                    $q | ConvertTo-Json | set-content $global:quests_json;
                     start-sleep 5
                 }
             }
 
         } while (($currentquest.Solved -eq $false) -and ($currentquest.active))
     } 
-    write-host "Finished: $questname"
 }

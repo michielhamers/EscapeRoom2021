@@ -1,9 +1,9 @@
 {
   "CurrentGame": {
-    "countdownto": "1/17/2022 7:38:02 PM",
-    "active": true,
-    "Game": "waitingtostart",
-    "lastupdated":false
+    "countdownto": "2021-01-18T16:03:30.693302+01:00",
+    "active": false,
+    "Game": "STOPPED",
+    "lastupdated": "2021-01-18T15:34:04.9875660+01:00"
   },
   "Screens": [
     {
@@ -12,115 +12,115 @@
       "showgeneralcountdown": true,
       "Content": "Dit is het hoofdscherm, bij dit hoofdscherm zit geen toetsenbord.",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "blue"
     },
-    { 
+    {
       "Screen": 2,
       "header": "EscapeRoom ±",
       "showgeneralcountdown": false,
       "Content": "Scherm 2. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": "questa",
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "blue"
     },
-    { 
+    {
       "Screen": 3,
       "header": "EscapeRoom ±",
       "showgeneralcountdown": false,
       "Content": "Scherm 3. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": "5",
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 4,
       "header": "EscapeRoom ±",
       "showgeneralcountdown": false,
       "Content": "Scherm 4. Als er een vraag verschijnt dan kun je het toetsenbord gebruiken",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 5,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 6,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 7,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 8,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 9,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
     },
-    { 
+    {
       "Screen": 10,
       "header": "EscapeRoom",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
-      "Questassigned" : false,
+      "Questassigned": false,
       "waitoninput": false,
       "refresh": 5,
       "active": true,
