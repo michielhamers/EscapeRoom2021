@@ -15,10 +15,10 @@ function openvideo(){
      # Start-Process "./media/chris.mp4" 
 }
 function ballinbox(){
-    for(){cls
+    for(){Clear-Host
         ($l="+$('-'*18)+")
-        7..0|%{$j=$_
-            "|$(-join(17..0|%{'* '[$j-[Math]::abs(7-$i%14)-or$_-[Math]::abs(17-$i%34)]}))|"}
+        7..0|ForEach-Object{$j=$_
+            "|$(-join(17..0|ForEach-Object{'* '[$j-[Math]::abs(7-$i%14)-or$_-[Math]::abs(17-$i%34)]}))|"}
             $l;$i++;sleep 0.5}
 }
 
@@ -62,35 +62,5 @@ function waitforUSB($timeout){
     } while (($usbgekoppeld -eq $false) -and (-not $timedout))
     return $usbgekoppeld;
 }
-Function Test-IsFileLocked {
-    [cmdletbinding()]
-    Param (
-        [parameter(Mandatory=$True,ValueFromPipeline=$True,ValueFromPipelineByPropertyName=$True)]
-        [Alias('FullName','PSPath')]
-        [string[]]$Path
-    )
-    Process {
-        ForEach ($Item in $Path) {
-            #Ensure this is a full path
-            $Item = Convert-Path $Item
-            #Verify that this is a file and not a directory
-            If ([System.IO.File]::Exists($Item)) {
-                Try {
-                    $FileStream = [System.IO.File]::Open($Item,'Open','Write')
-                    $FileStream.Close()
-                    $FileStream.Dispose()
-                    $IsLocked = $False
-                } Catch [System.UnauthorizedAccessException] {
-                    $IsLocked = 'AccessDenied'
-                } Catch {
-                    $IsLocked = $True
-                }
-                [pscustomobject]@{
-                    File = $Item
-                    IsLocked = $IsLocked
-                }
-            }
-        }
-    }
-}
+
  

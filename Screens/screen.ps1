@@ -1,14 +1,16 @@
 function choosescreen(){
   # $screennumer=$global:thisscreen
-  if ($global:thisscreen -eq "0"){
+  if (($global:thisscreen -ge 1) -and ($global:thisscreen -le 100)) {
+  } 
+  else{
     Write-host "will this be which monitor? (or 0 = exit)"
     $global:thisscreen=Read-host "screen"
     if ($global:thisscreen -eq "0") {
       exit
     }
       # $global:thisscreen=$screennumber
-    }
   }
+}
 function Setcolors($achtergrond){
   $Host.UI.RawUI.BackgroundColor = ($bckgrnd = $achtergrond)
   $Host.UI.RawUI.ForegroundColor = 'White'
@@ -26,11 +28,8 @@ function Setcolors($achtergrond){
 function showscreen(){
   do {
     # $screennumer=$global:thisscreen
-    do {
-      write-host "."
-      start-sleep 1
-    } while ((Test-IsFileLocked -Path $global:screen_json).islocked)
-    $a = Get-Content $global:screen_json -Raw | ConvertFrom-Json
+    
+    $a = screenjsonfromurl | ConvertFrom-Json
     $currentscreen=$a.Screens | Where-Object {$_.Screen -eq $global:thisscreen}
     #####################################################################################
     if ($currentscreen.active){

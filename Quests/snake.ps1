@@ -80,9 +80,9 @@ function gameOver {
   #>
   if ($global:numOfTails -ge 10){
     clear-host
-    # bigtekst "Gewonnen!!!"
-    bigtekst "CODE is:"
+    bigtekst "CODE is :"
     bigtekst "A P P E L"
+    write-host "Vul het antwoord in op de computer in de kamer op tafel."
     start-sleep 25
     clear-host
   }
