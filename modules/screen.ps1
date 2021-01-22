@@ -1,47 +1,34 @@
 function choosescreen(){
-  # $screennumer=$global:thisscreen
-  if (($global:thisscreen -ge 1) -and ($global:thisscreen -le 100)) {
-  } 
-  else{
+  $thisscherm=[int]$global:thisscreen
+  if (($thisscherm -ge 1) -and ($thisscherm -le 100)) {
+    write-host "[$thisscherm]"
+  } else {
     Write-host "will this be which monitor? (or 0 = exit)"
-    $global:thisscreen=Read-host "screen"
-    if ($global:thisscreen -eq "0") {
-      exit
-    }
-      # $global:thisscreen=$screennumber
+    $thisscreen=Read-host "screen"
+    $global:thisscreen=$thisscreen;
   }
-}
-function Setcolors($achtergrond){
-  $Host.UI.RawUI.BackgroundColor = ($bckgrnd = $achtergrond)
-  $Host.UI.RawUI.ForegroundColor = 'White'
-  $Host.PrivateData.ErrorForegroundColor = 'Red'
-  $Host.PrivateData.ErrorBackgroundColor = $bckgrnd
-  $Host.PrivateData.WarningForegroundColor = 'Magenta'
-  $Host.PrivateData.WarningBackgroundColor = $bckgrnd
-  $Host.PrivateData.DebugForegroundColor = 'Yellow'
-  $Host.PrivateData.DebugBackgroundColor = $bckgrnd
-  $Host.PrivateData.VerboseForegroundColor = 'Green'
-  $Host.PrivateData.VerboseBackgroundColor = $bckgrnd
-  $Host.PrivateData.ProgressForegroundColor = 'Cyan'
-  $Host.PrivateData.ProgressBackgroundColor = $bckgrnd
+  if ($global:thisscreen -eq "0") {
+    exit
+  }
 }
 function showscreen(){
   do {
-    # $screennumer=$global:thisscreen
-    
-    $a = screenjsonfromurl | ConvertFrom-Json
-    $currentscreen=$a.Screens | Where-Object {$_.Screen -eq $global:thisscreen}
+    $screennumer=$global:thisscreen
+    $a = controllerjsonfromfile | ConvertFrom-Json
+    $currentscreen=$a.Screens | Where-Object {$_.Screen -eq $screennumer}
     #####################################################################################
     if ($currentscreen.active){
       Setcolors $currentscreen.screenbackground;
-    } else {
-    Setcolors "red";
-    Clear-host
-    $currentscreen
-    $a.Screens
-    $a
-    Read-host " bug found contact the admin"
-    exit;
+    } 
+    else
+    {
+      Setcolors "red";
+      Clear-host
+      $currentscreen
+      $a.Screens
+      $a
+      Read-host " bug found contact the admin"
+      exit;
     }
     #####################################################################################
     Clear-Host
@@ -70,9 +57,6 @@ function showscreen(){
           $left_big=bigtekst $verschil_inmin;
           Write-Host $left_big;
         }
-        if ($currentscreen.Questassigned) {
-          startquest $currentscreen.Questassigned
-        }
         1..$currentscreen.refresh | ForEach-Object {
             Start-Sleep 1
             write-host "."   -nonewline
@@ -92,8 +76,9 @@ function showscreen(){
         if ($currentscreen.Questassigned -eq "databar") {
           startquest $currentscreen.Questassigned
         }
-        start-sleep 5
-        start-sleep 10
+        1..15 | ForEach-Object{
+          start-sleep -seconds 1
+        }
       }
       Default {
         Setcolors "red";
@@ -105,10 +90,12 @@ function showscreen(){
         read-host "En nu?"
       }
     }
+    if ($currentscreen.Questassigned) {
+      startquest $currentscreen.Questassigned
+    }
   } while (($a.CurrentGame.active) -or ($a.CurrentGame.Game -eq "Waitingtostart"))
 }
 function mainscreen(){
-
   choosescreen;
   showscreen;
   Setcolors black

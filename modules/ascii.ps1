@@ -1,4 +1,26 @@
-
+## tooling for creating ascii art 
+# usb https://manytools.org/hacker-tools/convert-images-to-ascii-art
+$ASCIIART_USB="                                                      @@@&                      
+                                                   #@@@(@@@@,                   
+                                                 @@@@     ,@@@&                 
+                                              #@@@(   @@     @@@@,              
+                                       .@@@%  &@    *@         ,@@@&            
+                                     &@@@@@@@@,         .@@   .@@@@             
+                                  ,@@@@@@@@@@@@@&           %@@@(               
+                                &@@@@@@@@@@@@@@@@@@,     .@@@@                  
+                             ,@@@@@@@@@@@@@@@@@@@@@@@&  %@@(                    
+                           &@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                       
+                        ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(                      
+                      &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                       
+                   ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#                          
+                 &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                            
+               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#                               
+               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                                 
+                &@@@@    #@@@@@@@@@@@@@@@@@#                                    
+                  .@@@@*    @@@@@@@@@@@@@.                                      
+                     @@@@@  @@@@@@@@@@#                                         
+                       .@@@@@@@@@@@@                                            
+                          @@@@@@@#                                              "
 function bigtekst($tekst){
     $cachedtekst="./Cached/$tekst"
     if (Test-Path $cachedtekst) {
@@ -10,4 +32,11 @@ function bigtekst($tekst){
     }
     return $returnvalue
 }
-
+function asciiart($drawing){
+    $returnvalue=""
+    switch ($drawing) {
+        usb { $returnvalue=$ASCIIART_USB  }
+        Default { "ASCII Art $drawing not found"}
+    }
+    return $returnvalue
+}

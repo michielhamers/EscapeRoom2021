@@ -2,46 +2,12 @@ clear-host
 . ./modules/ascii.ps1
 . ./Quests/Quests.ps1
 . ./modules/other.ps1
-$global:screen_json = "./screens/screen.json";
-$global:quests_json = "./quests/quests.json"; 
+$global:controller_json = "./controller/controller.json";
 $global:thisscreen = 0; 
 $global:maintimer = 30; #amount of minutes for default escape                                             
-function screenjsonfromurl(){
-    # $StatusCode="200";
-    # do{
-    #     $Command = "(Invoke-Webrequest -SkipCertificateCheck -Uri `"http://syn-nas.home:2021/EscapeRoom/Screens/screen.json`").RawContent"
-    #     # $Command = "(Invoke-Webrequest -Uri `"http://syn-nas.home:2021/EscapeRoom/quests/quests.json`").Content"
-    #     try {
-    #         $returnvalue=Invoke-Expression $Command;
-    #         # $R = Invoke-WebRequest -URI http://<non_existing_site>?q=how+many+feet+in+a+mile
-    #     }
-    #     catch {
-    #         $StatusCode=$_.Exception.Message
-    #     }
-    # } while ($StatusCode -ne "200")
-    $returnvalue = screenjsonfromfile
-    return $returnvalue
-  }
-function screenjsonfromfile(){
-    return get-content $global:screen_json -raw
-}
-function questjsonfromurl(){
-    # $StatusCode="200";
-    # do{
-    #     $Command = "(Invoke-Webrequest -SkipCertificateCheck -Uri `"http://syn-nas.home:2021/EscapeRoom/quests/quests.json`").RawContent"
-    #     try {
-    #         $returnvalue=Invoke-Expression $Command;
-    #         # $R = Invoke-WebRequest -URI http://<non_existing_site>?q=how+many+feet+in+a+mile
-    #     }
-    #     catch {
-    #         $StatusCode=$_.Exception.Message
-    #     }
-    # } while ($StatusCode -ne "200")
-    $returnvalue = screenquestsfromfile
-    return $returnvalue
-  }
-function screenquestsfromfile(){
-    return get-content $global:quests_json -raw
+function controllerjsonfromfile(){
+    # return get-content $global:controller_json -raw
+    return get-content $global:controller_json 
 }
 function clearlogs(){
     Write-Output "Starting" |Out-File -FilePath ./temp/main.log
@@ -76,13 +42,13 @@ function showgameconfig(){
 function ResetGameRoom(){
     clearlogs;
     write-host "ResetGameRoom"
-    Remove-Item -Path .\Answers\*.txt
-    Copy-Item ./Screens/empty/screen.json $global:screen_json;
-    Copy-Item ./Quests/empty/quests.json $global:quests_json;
+    Get-ChildItem ./Answers/ | Remove-Item 
+    Copy-Item ./controller/empty/controller.json $global:controller_json;
+    # Copy-Item ./Quests/empty/quests.json $global:quests_json;
 }
 function winner(){
     write-host "WINNER"
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Winner"
     $a.screens | ForEach-Object {
@@ -92,10 +58,10 @@ function winner(){
         $_.refresh=30;
         $_.Questassigned=$false
     }
-    $a | ConvertTo-Json | set-content $global:screen_json
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function loser(){
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Loser"
     $a.screens | ForEach-Object {
@@ -105,11 +71,11 @@ function loser(){
         $_.refresh=30;
         $_.Questassigned=$false
     }
-    $a | ConvertTo-Json | set-content $global:screen_json
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function menu(){
     header
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     write-host "Game menu " -ForegroundColor Yellow -nonewline
     write-host "[" -nonewline
     write-host $a.CurrentGame.Game -nonewline -ForegroundColor Yellow
@@ -131,22 +97,22 @@ function menu(){
 }
 function startEscape(){
     write-host "startEscape"
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $a.CurrentGame.active = $true
     $a.CurrentGame.Game = "Started"
     $a.CurrentGame.countdownto=(get-date).AddMinutes($global:maintimer)
     $a.CurrentGame.countdownto=get-date $a.CurrentGame.countdownto -format o
     $a.CurrentGame.LastUpdated=(get-date -format o).tostring()
     write-host "countdown to" $a.CurrentGame.countdownto
-    $a | ConvertTo-Json | set-content $global:screen_json
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function waitfordatabarquestcomple(){
     write-host "waitfordatabarquestcomple"
     do {
-        $q = questjsonfromurl |ConvertFrom-Json;
+        # $q = controllerjsonfromfile |ConvertFrom-Json;
         start-sleep 1
         write-host "." -NoNewline
-    } while ($q.databar.Solved -eq $false);
+    } while ((test-path ./Answers/databar) -eq $false);
 }
 function usbconnectandstart(){
     startquestonscreen -screen 1 -quest databar
@@ -158,35 +124,36 @@ function usbconnectandstart(){
 }
 function stopEscape(){
     write-host "stopEscape";
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $a.CurrentGame.active = $false
     $a.CurrentGame.Game = "STOPPED"
     $a.CurrentGame.LastUpdated=(get-date -format o).tostring()
-    $a | ConvertTo-Json | set-content $global:screen_json
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function useasscreenonly(){
     write-host "useasscreenonly"
     do {
-     . ./Screens/screen.ps1
+     . ./modules/screen.ps1
       clear-host;
     } while ($true)
 }
 function startquestonscreen ($screen, $quest){
     write-host "startquestonscreen "$screen $quest
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $a.screens | Where-Object {$_.screen -eq $screen} | ForEach-Object {
         $_.Questassigned = $quest
     }
     $a.CurrentGame.LastUpdated=(get-date -format o).tostring()
-    $a | ConvertTo-Json | set-content $global:screen_json
+    start-sleep 2
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function stopquestonscreen ($screen){
     write-host "stopquestonscreen "$screen $quest
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $currentscreen=$a.screens | Where-Object {$_.screen -eq $screen} 
     $currentscreen.Questassigned = $false
     $a.CurrentGame.LastUpdated=(get-date -format o).tostring()
-    $a | ConvertTo-Json | set-content $global:screen_json
+    $a | ConvertTo-Json | set-content $global:controller_json
 }
 function startquestsnake(){
     write-host "startquestsnake"
@@ -201,24 +168,25 @@ function startquestsnake(){
 function waitquestsolved($quest,$screen){
     write-host "waitquest "$screen $quest
     do {
-        $q = questjsonfromurl |ConvertFrom-Json
         start-sleep 1
         write-host "." -NoNewline
-    } while ($q.SnakeQuestion.Solved -eq $false);
-    stopquestonscreen 3
+        
+    } while ((Test-Path ./Answers/$quest) -eq $false);
+    stopquestonscreen $screen;
 }
 function waitquestsnake(){
     write-host "waitquestsnake "$screen $quest
-    do {
-        $q = questjsonfromurl |ConvertFrom-Json
-        start-sleep 1
-        write-host "." -NoNewline
-    } while ($q.SnakeQuestion.Solved -eq $false);
-    stopquestonscreen 3
+    waitquestsolved  -quest "SnakeQuestion" -screen 3
+    # do {ß
+    #     $q = controllerjsonfromfile |ConvertFrom-Json
+    #     start-sleep 1
+    #     write-host "." -NoNewline
+    # } while ($q.SnakeQuestion.Solved -eq $false);
+    # stopquestonscreen 3
 }
 function autodecide(){
     write-host "autodecide"
-    $a = screenjsonfromurl |ConvertFrom-Json
+    $a = controllerjsonfromfile |ConvertFrom-Json
     $StartDate=[datetime](GET-DATE -format o)
     $EndDate=[datetime]$a.CurrentGame.countdownto
     $verschil=(NEW-TIMESPAN –Start $StartDate –End $EndDate)
@@ -240,7 +208,7 @@ function autodecide(){
 }
 function stopANDreset(){
     stopEscape
-    1..15 |ForEach-Object {
+    1..21 |ForEach-Object {
         write-host "." -nonewline
         start-sleep 1
     }
@@ -248,11 +216,12 @@ function stopANDreset(){
 }
 function startquestA(){
     startquestonscreen 2 "questa"
-    do {
-        start-sleep 1
-        write-host "." -NoNewline
-        $q = questjsonfromurl |ConvertFrom-Json
-    } while ($q.questa.Solved -eq $false);
+    waitquestsolved -quest "questa" -screen 2
+    # do {
+    #     start-sleep 1
+    #     write-host "." -NoNewline
+    #     $q = controllerjsonfromfile |ConvertFrom-Json
+    # } while ($q.questa.Solved -eq $false);
     stopquestonscreen 2
 }
 function starthintmovie(){
@@ -273,7 +242,7 @@ function thegreatescape(){
     autodecide
     start-sleep 1
     startquestonscreen 4 "questb"
-    # waitquestdone
+    waitquestsolved -quest "questb" -screen 4
     start-sleep 1
     autodecide
     start-sleep 1
@@ -281,7 +250,7 @@ function thegreatescape(){
     winner;
 }
 function main(){
-    Setcolors "black"
+    Setcolors "black";
     clear-host;
     do {
         menu;

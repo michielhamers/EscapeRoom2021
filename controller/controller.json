@@ -56,7 +56,7 @@
     },
     { 
       "Screen": 5,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom  ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -68,7 +68,7 @@
     },
     { 
       "Screen": 6,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom  ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -80,7 +80,7 @@
     },
     { 
       "Screen": 7,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom  ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -92,7 +92,7 @@
     },
     { 
       "Screen": 8,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom  ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -104,7 +104,7 @@
     },
     { 
       "Screen": 9,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -116,7 +116,7 @@
     },
     { 
       "Screen": 10,
-      "header": "EscapeRoom",
+      "header": "EscapeRoom  ±",
       "showgeneralcountdown": false,
       "Content": "",
       "Contentvisible": true,
@@ -125,6 +125,88 @@
       "refresh": 5,
       "active": true,
       "screenbackground": "BLUE"
+    }
+  ],
+  "Quests": [
+    {
+      "quest": "databar",
+      "Question": "databar.ps1",
+      "type": "ps1",
+      "active": true,
+      "Correct": false,
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": false
+    }, 
+    {
+      "quest" : "questa",
+      "Question": "Wat is het aantal Harry Potter boeken?",
+      "type": "Q",
+      "active": true,
+      "Correct": 7,
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": false
+    },
+    {
+      "quest":"questb",
+      "Question": "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
+      "type": "Q",
+      "active": true,
+      "Correct": "Harry Potter",
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": false
+    },
+    {
+      "quest":"SnakeQuestion",
+      "Question": "Het spel van de SLANG is actief. Zoek het codewoord.",
+      "type": "Q",
+      "active": true,
+      "Correct": "Appel",
+      "Solved": false,
+      "Attempt": 1,
+      "Answer": false
+    },
+    {
+      "quest":"SnakeGame",
+      "Question": "snake.ps1",
+      "type": "ps1",
+      "active": true,
+      "Correct": "snake.ps1",
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": ""
+    },
+    {
+      "quest":"starthintmovie",
+      "Question": "starthintmovie.ps1",
+      "type": "ps1",
+      "active": true,
+      "Correct": "starthintmovie.ps1",
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": ""
+    },
+    {
+      "quest" : "SnakeMovie",
+      "Question": "SnakeMovie.ps1",
+      "type": "ps1",
+      "active": true,
+      "Correct": "SnakeMovie.ps1",
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": ""
+    },
+    {
+      "quest": "webje",
+      "Question": "openbrowser http://www.nu.nl 60",
+      "type": "func",
+      "active": true,
+      "Correct": "openbrowser",
+      "Solved": false,
+      "Attempt": 0,
+      "Answer": ""
     }
   ]
 }

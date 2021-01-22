@@ -5,8 +5,7 @@
 #is this a mac / unix based system
 function determineglobalvar(){
     #default $IsMacOS
-    #default $IsMacOS 
-    
+    #default $IsMacOS    
 }
 function mountsynnas(){
     mount_smbfs //admin@syn-nas/ER/2021 ./mntpoint
