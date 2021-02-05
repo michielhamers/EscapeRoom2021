@@ -20,6 +20,7 @@ This sction will be used to describe the play
 Finish is always few digit code to unlock the last puzzle lock.
 
 ## inspiration
+
 <https://artii.herokuapp.com/>
 <https://www.mythricmysterymaster.com/trial/>
 <https://azure-samples.github.io/raspberry-pi-web-simulator/>
@@ -32,6 +33,6 @@ Finish is always few digit code to unlock the last puzzle lock.
 <https://www.youtube.com/watch?v=bO5-FjLe5xE&ab_channel=TheRaspberryPiGuy>
 <https://yesno.wtf/#api>
 <https://github.com/public-apis/public-apis>
-<https://deckofcardsapi.com/api/deck/new
-<https://petri.com/how-to-use-powershell-7-to-work-with-json-file #measure-object
-Start-Process -FilePath url
+<https://deckofcardsapi.com/api/deck/new>
+<https://petri.com/how-to-use-powershell-7-to-work-with-json-file>
+<https://trevorsullivan.net/2019/07/30/control-bluetooth-on-apple-macbook-pro-from-the-command-line>

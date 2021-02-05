@@ -44,12 +44,13 @@ function audio(){
         $Song.Play()
     }
 }
-function waitforUSB($timeout){
+function waitforUSB($timeout,$checkonfile){
     $usbgekoppeld = $false
     $timedout = $false;
     $aftellen = $timeout;
+    # $checkonfile "ER.TXT"
     do {
-        $paden=Join-Path -path ((Get-PSDrive -PSProvider FileSystem).root) -ChildPath "ER.TXT"
+        $paden=Join-Path -path ((Get-PSDrive -PSProvider FileSystem).root) -ChildPath $checkonfile 
         $paden | ForEach-Object {
             if (test-path $_) {
                 $usbgekoppeld = $true
