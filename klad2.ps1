@@ -5,7 +5,7 @@ $a = Get-Content $pathToJson -Raw |ConvertFrom-Json
 # $a | where $_.Name -like "Screen*"   
 # $a
 write-host " --- "
-$a.Screens | % {
+$a.Screens | ForEach-Object {
     $_.Name
 }
 # | Select -ExpandProperty Type

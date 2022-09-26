@@ -1,3 +1,4 @@
+subst e: .
 e:
-cd E:\EscapeRoom
-cmd /k powershell -executionpolicy bypass -File E:\EscapeRoom\main.ps1
+cd E:\
+cmd /k powershell -executionpolicy bypass -File E:\main.ps1
