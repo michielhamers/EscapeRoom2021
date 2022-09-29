@@ -3,7 +3,8 @@
 # customizable values
 $debug =                      0
 $boardWidth =                 20
-$speed =                      0.40   # controls sleep by milliseconds. the larger the number, the slower the speed
+$speed =                      0.60   # controls sleep by milliseconds. the larger the number, the slower the speed
+$global:targetApple =         2
 
 # definitions
 $playArea =                   $boardWidth - 2   # - 1 for each of the vertical sides of the board (always 2)
@@ -78,7 +79,7 @@ function gameOver {
       write-host ""
   }
   #>
-  if ($global:numOfTails -ge 10){
+  if ($global:numOfTails -ge $global:targetApple){
     clear-host
     # bigtekst "Gewonnen!!!"
     bigtekst "CODE is:"

@@ -20,18 +20,17 @@ This sction will be used to describe the play
 Finish is always few digit code to unlock the last puzzle lock.
 
 ## inspiration
-<https://artii.herokuapp.com/>
-<https://www.mythricmysterymaster.com/trial/>
-<https://azure-samples.github.io/raspberry-pi-web-simulator/>
-<https://projects.raspberrypi.org/en/projects/physical-computing/3>
-<https://gpiozero.readthedocs.io/en/stable/>
-<https://www.raspberrypi.org/documentation/usage/gpio/>
-<https://makecode.microbit.org/v0>
-<https://projects.raspberrypi.org/en/projects/microbit-meteorologist>
-<https://support.microbit.org/support/solutions/articles/19000055058-using-micro-bit-with-raspberry-pi>
-<https://www.youtube.com/watch?v=bO5-FjLe5xE&ab_channel=TheRaspberryPiGuy>
-<https://yesno.wtf/#api>
-<https://github.com/public-apis/public-apis>
-<https://deckofcardsapi.com/api/deck/new
-<https://petri.com/how-to-use-powershell-7-to-work-with-json-file #measure-object
-Start-Process -FilePath url
+- <https://artii.herokuapp.com/>
+- <https://www.mythricmysterymaster.com/trial/>
+- <https://azure-samples.github.io/raspberry-pi-web-simulator/>
+- <https://projects.raspberrypi.org/en/projects/physical-computing/3>
+- <https://gpiozero.readthedocs.io/en/stable/>
+- <https://www.raspberrypi.org/documentation/usage/gpio/>
+- <https://makecode.microbit.org/v0>
+- <https://projects.raspberrypi.org/en/projects/microbit-meteorologist>
+- <https://support.microbit.org/support/solutions/articles/19000055058-using-micro-bit-with-raspberry-pi>
+- <https://www.youtube.com/watch?v=bO5-FjLe5xE&ab_channel=TheRaspberryPiGuy>
+- <https://yesno.wtf/#api>
+- <https://github.com/public-apis/public-apis>
+- <https://deckofcardsapi.com/api/deck/new
+- <https://petri.com/how-to-use-powershell-7-to-work-with-json-file 
