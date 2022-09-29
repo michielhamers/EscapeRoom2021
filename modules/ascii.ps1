@@ -1,8 +1,8 @@
 
 function bigtekst($tekst){
-    $ctfile = 'e:/cache/$tekst';
+    $ctfile = "e:/cache/$tekst";
     if (Test-Path $ctfile) {
-        $returnvalue=Get-Content $cachedtekstfile -Raw
+        $returnvalue=Get-Content $ctfile -Raw
     }else {
         try{
         $Command = "(Invoke-Webrequest -Uri `"https://artii.herokuapp.com/make?text=$tekst`").Content"
@@ -10,7 +10,7 @@ function bigtekst($tekst){
         $returnvalue |out-file $ctfile;
         }
         catch {
-            $text | out-file $ctfile;
+            Out-File -FilePath $ctfile -InputObject $tekst -Encoding ASCII -Width 80
         }
     }
     return $returnvalue
