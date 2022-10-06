@@ -1,74 +1,74 @@
 {
-  "databar": {
-    "Question": "databar.ps1",
-    "type": "ps1",
-    "active": true,
-    "Correct": false,
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": false
-  },
-  "questa": {
-    "Question": "Wat is het aantal Harry Potter boeken?",
-    "type": "Q",
-    "active": true,
-    "Correct": 7,
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": false
-  },
-  "hoofdpersonage": {
-    "Question": "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
-    "type": "Q",
-    "active": true,
-    "Correct": "Harry Potter",
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": false
-  },
-  "SnakeQuestion": {
-    "Question": "Het spel van de SLANG is actief. Zoek het codewoord.",
-    "type": "Q",
-    "active": true,
-    "Correct": "Appel",
-    "Solved": false,
-    "Attempt": 1,
-    "Answer": false
-  },
-  "SnakeGame": {
-    "Question": "snake.ps1",
-    "type": "ps1",
-    "active": true,
-    "Correct": "snake.ps1",
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": ""
-  },
-  "starthintmovie": {
-    "Question": "starthintmovie.ps1",
-    "type": "ps1",
-    "active": true,
-    "Correct": "starthintmovie.ps1",
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": ""
-  },
-  "SnakeMovie": {
-    "Question": "SnakeMovie.ps1",
-    "type": "ps1",
-    "active": true,
-    "Correct": "SnakeMovie.ps1",
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": ""
-  },
-  "webje": {
-    "Question": "openbrowser http://www.nu.nl 60",
-    "type": "func",
-    "active": true,
-    "Correct": "openbrowser",
-    "Solved": false,
-    "Attempt": 0,
-    "Answer": ""
-  }
+    "databar":  {
+                    "Question":  "databar.ps1",
+                    "type":  "ps1",
+                    "active":  true,
+                    "Correct":  false,
+                    "Solved":  false,
+                    "Attempt":  0,
+                    "Answer":  false
+                },
+    "questa":  {
+                   "Question":  "Wat is het aantal Harry Potter boeken?",
+                   "type":  "Q",
+                   "active":  true,
+                   "Correct":  7,
+                   "Solved":  true,
+                   "Attempt":  3,
+                   "Answer":  "7"
+               },
+    "hoofdpersonage":  {
+                           "Question":  "Wat is het hoofdpersonage van de Harry Potter films? (Let op hoofdletters)",
+                           "type":  "Q",
+                           "active":  true,
+                           "Correct":  "Harry Potter",
+                           "Solved":  false,
+                           "Attempt":  0,
+                           "Answer":  false
+                       },
+    "SnakeQuestion":  {
+                          "Question":  "Het spel van de SLANG is actief. Zoek het codewoord.",
+                          "type":  "Q",
+                          "active":  true,
+                          "Correct":  "Appel",
+                          "Solved":  false,
+                          "Attempt":  1,
+                          "Answer":  false
+                      },
+    "SnakeGame":  {
+                      "Question":  "snake.ps1",
+                      "type":  "ps1",
+                      "active":  true,
+                      "Correct":  "snake.ps1",
+                      "Solved":  false,
+                      "Attempt":  0,
+                      "Answer":  ""
+                  },
+    "starthintmovie":  {
+                           "Question":  "starthintmovie.ps1",
+                           "type":  "ps1",
+                           "active":  true,
+                           "Correct":  "starthintmovie.ps1",
+                           "Solved":  false,
+                           "Attempt":  0,
+                           "Answer":  ""
+                       },
+    "SnakeMovie":  {
+                       "Question":  "SnakeMovie.ps1",
+                       "type":  "ps1",
+                       "active":  true,
+                       "Correct":  "SnakeMovie.ps1",
+                       "Solved":  false,
+                       "Attempt":  0,
+                       "Answer":  ""
+                   },
+    "webje":  {
+                  "Question":  "openbrowser http://www.nu.nl 60",
+                  "type":  "func",
+                  "active":  true,
+                  "Correct":  "openbrowser",
+                  "Solved":  false,
+                  "Attempt":  0,
+                  "Answer":  ""
+              }
 }

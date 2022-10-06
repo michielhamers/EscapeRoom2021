@@ -17,7 +17,7 @@ This sction will be used to describe the play
 
 ## Finish
 
-Finish is always few digit code to unlock the last puzzle lock.
+Finish is always four or five digit code to unlock the last puzzle lock.
 
 ## inspiration
 - <https://artii.herokuapp.com/>
